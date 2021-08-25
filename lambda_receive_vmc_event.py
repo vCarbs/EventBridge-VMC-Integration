@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     vmName = string_event[indexToObject + 8 : string_event.find(" on", indexToObject)]
     print(vmName)
     indexToObject2 = string_event.find("AWS.VMCLAB")
-    deletedBy = string_event[indexToObject2 : string_event.find("] [SDDC-Datacenter]")]
+    deletedBy = string_event[indexToObject2 + 12 : string_event.find("] [SDDC-Datacenter]")]
     dataExtracted = {'Deleted VM': vmName, 'Deleted By': deletedBy}
     
     response = client.put_events(
