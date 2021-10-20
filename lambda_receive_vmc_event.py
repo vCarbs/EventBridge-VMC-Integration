@@ -14,8 +14,8 @@ def lambda_handler(event, context):
         indexToObject = string_event.find("Removed ")
         vmName = string_event[indexToObject + 8 : string_event.find(" on", indexToObject)]
         print(vmName)
-        indexToObject2 = string_event.find("VMCLAB")
-        deletedBy = string_event[indexToObject2 + 12 : string_event.find("] [SDDC-Datacenter]")]
+        indexToObject2 = string_event.find("[info]")
+        deletedBy = string_event[indexToObject2 + 8 : string_event.find("] [SDDC-Datacenter]")]
         dataExtracted = {'Deleted VM': vmName, 'Deleted By': deletedBy}
         detailType = "VM Deleted"
         
@@ -25,8 +25,8 @@ def lambda_handler(event, context):
         print(vmName)
         indexToObject2 = string_event.find("Template ")
         templateName = string_event[indexToObject2 + 9 : string_event.find(" deployed to", indexToObject2)]
-        indexToObject3 = string_event.find("VMCLAB")
-        createdBy = string_event[indexToObject3 + 11 : string_event.find("] [SDDC-Datacenter]")]
+        indexToObject3 = string_event.find("[info]")
+        createdBy = string_event[indexToObject3 + 8 : string_event.find("] [SDDC-Datacenter]")]
         dataExtracted = {'Created VM': vmName, 'Template Used': templateName, 'Created By': createdBy}
         detailType = "VM created from template"
         
@@ -43,8 +43,8 @@ def lambda_handler(event, context):
         indexToObject = string_event.find("Created virtual machine ")
         vmName = string_event[indexToObject + 24 : string_event.find(" on", indexToObject)]
         print(vmName)
-        indexToObject2 = string_event.find("VMCLAB\\")
-        createdBy = string_event[indexToObject2 + 12 : string_event.find("] [SDDC-Datacenter]")]
+        indexToObject2 = string_event.find("[info]")
+        createdBy = string_event[indexToObject2 + 8 : string_event.find("] [SDDC-Datacenter]")]
         dataExtracted = {'Created VM': vmName, 'Created By': createdBy}
         detailType = "VM Created"
     
